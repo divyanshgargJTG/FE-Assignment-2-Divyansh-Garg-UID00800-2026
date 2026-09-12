@@ -39,12 +39,6 @@ export default [
             camelcase: ['warn'],
             'no-console': ['warn'],
             ...reactHooks.configs['recommended-latest'].rules,
-            'react-refresh/only-export-components': [
-                'warn',
-                {
-                    allowConstantExport: true,
-                },
-            ],
         },
     },
 ];

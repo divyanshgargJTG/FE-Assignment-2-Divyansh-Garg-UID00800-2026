@@ -9,6 +9,7 @@ declare module '@mui/material/styles' {
                 contentMaxWidth: string;
                 pagePadding: string;
                 sectionGap: string;
+                logoutMenuWidth: string;
             };
 
             radius: {
@@ -49,6 +50,21 @@ declare module '@mui/material/styles' {
                 xxl: number;
             };
 
+            iconSize: {
+                sm: string;
+                md: string;
+                lg: string;
+                xl: string;
+                xxl: string;
+            };
+
+            fontSize: {
+                xs: string;
+                sm: string;
+                md: string;
+                lg: string;
+            };
+
             transitions: {
                 slow: string;
                 normal: string;
@@ -64,6 +80,7 @@ declare module '@mui/material/styles' {
                 contentMaxWidth?: string;
                 pagePadding?: string;
                 sectionGap?: string;
+                logoutMenuWidth?: string;
             };
 
             radius?: {
@@ -104,6 +121,21 @@ declare module '@mui/material/styles' {
                 xxl?: number;
             };
 
+            iconSize?: {
+                sm?: string;
+                md?: string;
+                lg?: string;
+                xl?: string;
+                xxl?: string;
+            };
+
+            fontSize?: {
+                xs?: string;
+                sm?: string;
+                md?: string;
+                lg?: string;
+            };
+
             transitions?: {
                 slow?: string;
                 normal?: string;
@@ -115,6 +147,7 @@ declare module '@mui/material/styles' {
     interface Mixins {
         pageContainer: typeof mixins.pageContainer;
         flexCenter: typeof mixins.flexCenter;
+        flexCenterCol: typeof mixins.flexCenterCol;
         flexBetween: typeof mixins.flexBetween;
         card: typeof mixins.card;
         visuallyHidden: typeof mixins.visuallyHidden;
