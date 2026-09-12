@@ -13,8 +13,6 @@ import {
 } from '@mui/material';
 import { NavLink } from 'react-router';
 
-import { useState, type MouseEvent } from 'react';
-
 import { navigationItems } from '@/config/navigation';
 import LogoutMenu from './LogoutMenu';
 
@@ -22,23 +20,15 @@ import { pxToRem } from '@/theme/functions';
 import { colors } from '@/theme/colors';
 import { variables } from '@/theme/variables';
 
+import { useExpand } from '@/app/hooks';
+
 interface MobileMenuProps {
     isAuthenticated: boolean;
     currentPath: string;
 }
 
 const MobileMenu = ({ isAuthenticated, currentPath }: MobileMenuProps) => {
-    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-    const open = Boolean(anchorEl);
-
-    const handleOpen = (event: MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const { open, handleOpen, handleClose } = useExpand();
 
     const visibleNavigationItems = navigationItems.filter(
         (item) => !item.requiresAuth || isAuthenticated,
@@ -72,7 +62,7 @@ const MobileMenu = ({ isAuthenticated, currentPath }: MobileMenuProps) => {
                 slotProps={{
                     paper: {
                         sx: {
-                            width: '100vw',
+                            width: '80vw',
                             backgroundColor: colors.secondary[50],
                         },
                     },
@@ -80,7 +70,7 @@ const MobileMenu = ({ isAuthenticated, currentPath }: MobileMenuProps) => {
             >
                 <Box
                     sx={{
-                        width: '100vw',
+                        width: '80pxToRem(40),vw',
                     }}
                     role="presentation"
                 >
@@ -112,7 +102,13 @@ const MobileMenu = ({ isAuthenticated, currentPath }: MobileMenuProps) => {
 
                     <Divider />
 
-                    <List>
+                    <List
+                        sx={(theme) => ({
+                            ...theme.mixins.flexCenterCol,
+                            height: `calc(100vh - ${theme.variables.layout.navbarHeight})`,
+                            justifyContent: 'start',
+                        })}
+                    >
                         {visibleNavigationItems.map((item) => {
                             const Icon = item.icon;
 
@@ -132,6 +128,9 @@ const MobileMenu = ({ isAuthenticated, currentPath }: MobileMenuProps) => {
                                         component={NavLink}
                                         to={item.path}
                                         onClick={handleClose}
+                                        sx={{
+                                            gap: pxToRem(10),
+                                        }}
                                     >
                                         <ListItemIcon
                                             sx={(theme) => ({
@@ -139,7 +138,12 @@ const MobileMenu = ({ isAuthenticated, currentPath }: MobileMenuProps) => {
                                                 color: colors.secondary[900],
                                             })}
                                         >
-                                            <Icon />
+                                            <Icon
+                                                sx={{
+                                                    width: pxToRem(35),
+                                                    height: pxToRem(35),
+                                                }}
+                                            />
                                         </ListItemIcon>
 
                                         <ListItemText
@@ -165,10 +169,14 @@ const MobileMenu = ({ isAuthenticated, currentPath }: MobileMenuProps) => {
                         {!isAuthenticated && currentPath !== '/login' && (
                             <ListItem
                                 disablePadding
-                                sx={{
-                                    justifyContent: 'center',
+                                onClick={handleClose}
+                                sx={(theme) => ({
+                                    ...theme.mixins.flexCenterCol,
+                                    flex: 1,
                                     mt: pxToRem(20),
-                                }}
+                                    justifyContent: 'end',
+                                    mb: theme.variables.spacing.xl,
+                                })}
                             >
                                 <Button
                                     component={NavLink}
@@ -191,11 +199,15 @@ const MobileMenu = ({ isAuthenticated, currentPath }: MobileMenuProps) => {
                         {isAuthenticated && (
                             <ListItem
                                 sx={(theme) => ({
+                                    ...theme.mixins.flexCenterCol,
                                     px: theme.variables.spacing.sm,
-                                    justifyContent: 'center',
+                                    flex: 1,
+                                    justifyContent: 'end',
+                                    mb: theme.variables.spacing.xl,
                                 })}
                             >
                                 <LogoutMenu
+                                    fun={handleClose}
                                     sx={() => ({
                                         ml: variables.spacing.sm,
                                         borderRadius: variables.radius.pill,

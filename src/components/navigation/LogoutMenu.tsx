@@ -1,35 +1,30 @@
 import { Logout } from '@mui/icons-material';
 import { Button, Divider, Paper, Popover, Stack, Typography, type SxProps } from '@mui/material';
 
-import { useState, type MouseEvent } from 'react';
-
-import { useAppDispatch } from '@/app/hooks';
+import { useAppDispatch, useExpand } from '@/app/hooks';
 import { logoutUser } from '@/features/auth/authSlice';
 
 import { colors } from '@/theme/colors';
+import { useNavigate } from 'react-router';
 
 interface LogoutProps {
+    fun?: Function;
     sx?: SxProps;
 }
 
-const LogoutMenu = ({ sx }: LogoutProps) => {
+const LogoutMenu = ({ fun, sx }: LogoutProps) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
-    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-    const open = Boolean(anchorEl);
-
-    const handleOpen = (event: MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const { anchorEl, open, handleOpen, handleClose } = useExpand();
 
     const handleLogout = () => {
         dispatch(logoutUser());
         handleClose();
+        if (fun) {
+            fun();
+        }
+        navigate('/login');
     };
 
     return (
