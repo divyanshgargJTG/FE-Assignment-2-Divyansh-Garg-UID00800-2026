@@ -21,8 +21,8 @@ function ReduxDemo() {
                 user: {
                     login: 'divyanshgargJTG',
                     id: 315348310,
-                    avatar_url: 'https://avatars.githubusercontent.com/u/315348310?v=4',
-                    html_url: 'https://github.com/divyanshgargJTG',
+                    avatarUrl: 'https://avatars.githubusercontent.com/u/315348310?v=4',
+                    htmlUrl: 'https://github.com/divyanshgargJTG',
                 },
                 token: 'Token Demo',
             }),

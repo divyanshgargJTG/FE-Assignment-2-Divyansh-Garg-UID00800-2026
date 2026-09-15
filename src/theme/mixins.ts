@@ -15,6 +15,12 @@ export const mixins = {
         justifyContent: 'center',
     },
 
+    flexCenterCol: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
     flexBetween: {
         display: 'flex',
         alignItems: 'center',

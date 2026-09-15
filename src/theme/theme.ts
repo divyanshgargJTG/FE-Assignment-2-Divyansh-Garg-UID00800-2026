@@ -6,7 +6,7 @@ import { typography } from './typography';
 import { variables } from './variables';
 import { mixins } from './mixins';
 
-export let theme = createTheme({
+export const theme = createTheme({
     cssVariables: true,
 
     palette: {
