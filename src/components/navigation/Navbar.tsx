@@ -4,7 +4,7 @@ import { NavLink, useLocation } from 'react-router';
 
 import { useAppSelector } from '@/app/hooks';
 
-import { navigationItems } from '@/components/navigation/navigation';
+import { useNavigationItems } from '@/components/navigation/navigation';
 
 import { NavButton } from './NavButton';
 import MobileMenu from '../menu/MobileMenu';
@@ -24,6 +24,8 @@ const Navbar = () => {
     const location = useLocation();
 
     const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+
+    const navigationItems = useNavigationItems();
 
     const visibleNavigationItems = navigationItems.filter(
         (item) => !item.requiresAuth || isAuthenticated,
