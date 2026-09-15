@@ -15,7 +15,7 @@ const NotFound = () => {
                 ...theme.mixins.flexCenter,
                 p: theme.variables.layout.pagePadding,
 
-                minHeight: '100vh',
+                minHeight: `calc(100vh - ${theme.variables.layout.navbarHeight})`,
                 position: 'relative',
                 overflow: 'hidden',
                 backgroundColor: colors.primary[600],
@@ -23,15 +23,15 @@ const NotFound = () => {
         >
             <Bubble
                 sx={{
-                    top: pxToRem(-160),
-                    right: pxToRem(-128),
+                    top: pxToRem(-120),
+                    right: pxToRem(-120),
                 }}
             />
 
             <Bubble
                 sx={{
-                    bottom: pxToRem(-160),
-                    left: pxToRem(-128),
+                    bottom: pxToRem(-120),
+                    left: pxToRem(-120),
                 }}
             />
 
@@ -40,8 +40,7 @@ const NotFound = () => {
                     maxWidth: theme.variables.layout.contentMaxWidth,
                     border: `1px solid ${theme.palette.divider}`,
                     borderRadius: theme.variables.radius.xl,
-                    backgroundColor: `${theme.palette.background.paper}CC`,
-                    backdropFilter: 'blur(1rem)',
+                    backgroundColor: colors.secondary[50],
                     boxShadow: theme.variables.shadows.card,
 
                     position: 'relative',
